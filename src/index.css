@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-theme-bg: #FDF9E2; /* Cozy pastel cream yellow background */
+  --color-theme-surface: #ffffff; /* Soft card white */
+  --color-theme-accent: #FF5A79; /* Vibrant Anime Sakura Pink */
+  --color-theme-accent-blue: #4BA3E3; /* Anime Sky Blue */
+  --color-theme-border: #E8DDBC; /* Soft sand-gold border */
+  --color-theme-border-light: #F7F3D5; /* Subtle light background border */
+  --color-theme-muted: #8E846A; /* Cozy warm taupe-grey */
+  --color-theme-text: #2C2518; /* Deep warm espresso brown */
+}

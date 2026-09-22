@@ -1,0 +1,6 @@
+{
+  "name": "SHISEI PIVOT 姿勢",
+  "description": "Prototype Animation ToolBox V1 - Interactive sequence retargeting, motion synthesis, and modular vehicle/tank component decomposition with Sakura aesthetic. Support for English and Japanese localization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["image-generation", "sqlite", "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

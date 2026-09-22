@@ -1,0 +1,125 @@
+{
+  "entities": {
+    "Action": {
+      "title": "Action",
+      "description": "Represents an animation action verb and its sequential frames",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique ID for the action, e.g. L-01" },
+        "category": { "type": "string", "description": "Group category of the action" },
+        "verb_name": { "type": "string", "description": "Dynamic verb label of the action" },
+        "sub_action": { "type": "string", "description": "Comma-separated sub-actions" },
+        "hand_object": { "type": "string", "description": "Comma-separated recommended equipment or hands" },
+        "frame_count": { "type": "integer", "description": "Number of keyframes available" },
+        "frame_delay": { "type": "integer", "description": "Millisecond interval between frames" },
+        "notes": { "type": "string", "description": "Operational annotations or translation notes" },
+        "thumbnail_path": { "type": "string", "description": "Relative path or Base64 Data URL for thumbnail preview" },
+        "frames": {
+          "type": "array",
+          "description": "Array of paths or Base64 Data URLs representing each frame animation sequence"
+        }
+      },
+      "required": ["id", "category", "verb_name", "sub_action", "hand_object"]
+    },
+    "Weapon": {
+      "title": "Weapon",
+      "description": "Represents an item or weapon from the survival-horror store library",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique ID for the weapon, e.g. W-01" },
+        "name": { "type": "string", "description": "The friendly weapon name" },
+        "category": { "type": "string", "description": "Category group" },
+        "hand_grip": { "type": "string", "description": "One-Handed or Two-Handed grip style" },
+        "description": { "type": "string", "description": "Aesthetic and tactical description of the gear" },
+        "thumbnail_path": { "type": "string", "description": "Relative path or Base64 Data URL for thumbnail preview" },
+        "image_path": { "type": "string", "description": "The primary default image representation path" },
+        "images": {
+          "type": "array",
+          "description": "List of user-uploaded composite reference images in Base64 or local paths"
+        }
+      },
+      "required": ["id", "name", "category", "hand_grip"]
+    },
+    "GeneratedAsset": {
+      "title": "GeneratedAsset",
+      "description": "Represents an AI synthesis target output mapping and telemetry log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique asset tracking ID" },
+        "original_input_image": { "type": "string", "description": "Input template image source" },
+        "output_image_path": { "type": "string", "description": "Base64 or server static upload destination path" },
+        "action_id": { "type": "string", "description": "Associated action sequence ID link" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Creation time marker" }
+      },
+      "required": ["id", "output_image_path"]
+    },
+    "Character": {
+      "title": "Character",
+      "description": "Represents a validated 2D character avatar template saved for alignment and multi-view generation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique character ID" },
+        "name": { "type": "string", "description": "Name of the synthesized avatar" },
+        "imageUrl": { "type": "string", "description": "The base64 encoded character illustration or local path" },
+        "category": { "type": "string", "description": "Anatomical category e.g. Human Biped, Quadruped" },
+        "isHuman": { "type": "boolean", "description": "Specifies if character has human features" },
+        "isBiped": { "type": "boolean", "description": "Specifies if character is bipedal" },
+        "isComplete": { "type": "boolean", "description": "Specifies if body is fully showing and complete" },
+        "isQuadruped": { "type": "boolean", "description": "Specifies if character is a four-legged quadruped" },
+        "isExtraterrestrial": { "type": "boolean", "description": "Specifies if character is an extraterrestrial alien creature" },
+        "hairColor": { "type": "string", "description": "Primary hair hexadecimal or name color" },
+        "suitColor": { "type": "string", "description": "Primary costume hexadecimal or name color" },
+        "skinColor": { "type": "string", "description": "Primary skin tone color" },
+        "gender": { "type": "string", "description": "Character gender configuration" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["id", "name", "imageUrl", "category"]
+    },
+    "SpriteCacheItem": {
+      "title": "SpriteCacheItem",
+      "description": "Represents an auto-separated sprite cutout stored in the pose cache",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique cutout ID" },
+        "url": { "type": "string", "description": "Base64 or server static upload destination path of the cutout" },
+        "originalUrl": { "type": "string", "description": "Original image URL from which this cutout was extracted" },
+        "bgRemoved": { "type": "boolean", "description": "Whether the background was removed" },
+        "prompt": { "type": "string", "description": "AI prompt or label for the cutout" },
+        "bbox": {
+          "type": "object",
+          "description": "Bounding box parameters"
+        },
+        "bgR": { "type": "integer" },
+        "bgG": { "type": "integer" },
+        "bgB": { "type": "integer" },
+        "sheetId": { "type": "string" },
+        "sheetName": { "type": "string" },
+        "bboxIndex": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "url"]
+    }
+  },
+  "firestore": {
+    "actions": {
+      "schema": "Action",
+      "description": "The persistent library repository of cartoon animation action verbs"
+    },
+    "weapons": {
+      "schema": "Weapon",
+      "description": "The storage directory of survival gear and weapon blueprints"
+    },
+    "assets": {
+      "schema": "GeneratedAsset",
+      "description": "Historical repository of generated pose assets"
+    },
+    "characters": {
+      "schema": "Character",
+      "description": "Registry of validated avatars stored for design alignment overlays"
+    },
+    "sprite_cache": {
+      "schema": "SpriteCacheItem",
+      "description": "Persistent repository of auto-separated cutout sprites for next-session recovery"
+    }
+  }
+}

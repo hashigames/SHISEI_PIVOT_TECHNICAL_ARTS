@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Catch-all Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Hardened Global Helpers ---
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- Actions Collection ---
+    match /actions/{actionId} {
+      allow read: if true;
+      allow write: if isValidId(actionId);
+    }
+
+    // --- Weapons Collection ---
+    match /weapons/{weaponId} {
+      allow read: if true;
+      allow write: if isValidId(weaponId);
+    }
+
+    // --- Assets Collection ---
+    match /assets/{assetId} {
+      allow read: if true;
+      allow write: if isValidId(assetId);
+    }
+
+    // --- Characters Collection ---
+    match /characters/{characterId} {
+      allow read: if true;
+      allow write: if isValidId(characterId);
+    }
+
+    // --- Sprite Cache Collection ---
+    match /sprite_cache/{spriteId} {
+      allow read: if true;
+      allow write: if isValidId(spriteId);
+      allow delete: if isValidId(spriteId);
+    }
+  }
+}
